@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dynatrace-mcp-server
+  labels:
+    app: dynatrace-mcp-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dynatrace-mcp-server
+  template:
+    metadata:
+      labels:
+        app: dynatrace-mcp-server
+    spec:
+      containers:
+      - name: dynatrace-mcp-server
+        image: dynatrace-mcp-server:latest
+        ports:
+        - containerPort: 3000

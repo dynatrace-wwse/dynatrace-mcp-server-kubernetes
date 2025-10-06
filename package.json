@@ -1,0 +1,14 @@
+{
+  "name": "dynatrace-mcp-server-kubernetes",
+  "version": "1.0.0",
+  "description": "A simple Node.js application with Express, containerized for Kubernetes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

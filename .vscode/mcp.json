@@ -1,0 +1,9 @@
+{
+    "servers": {
+        "playground-mcp-server": {
+            "url": "http://playground-mcp-server.whydevslovedynatrace.com",
+            "type": "http"
+        }
+    },
+    "inputs": []
+}

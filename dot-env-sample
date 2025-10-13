@@ -1,0 +1,9 @@
+# Environment variables
+
+# Mapping of the Secrets defined in the .devcontainer.json file
+# Dynatrace Tenant
+DT_ENVIRONMENT=https://abc123.apps.dynatrace.com
+
+DT_GRAIL_QUERY_BUDGET_GB=1000
+DT_MCP_DISABLE_TELEMETRY=false
+DT_PLATFORM_TOKEN=<dt0s16.B2UAS7.XYZA - replace with your token >

@@ -1,24 +1,34 @@
 #!/bin/bash
 
 setVariables() {
+    
+    # Settings
 
     NAME="dynatrace-mcp-server"
-    NAMESPACE="dynatrace-mcp-server"
+    NAMESPACE="playground-mcp-server"
 
-    VERSION=v0.7.0
+    VERSION=latest
     IMAGE="shinojosa/$NAME:$VERSION"
 
+    # MCP Server settings (defined in the .env file)
+    source .env
+    #DT_GRAIL_QUERY_BUDGET_GB=1000
+    #DT_MCP_DISABLE_TELEMETRY=false
+    
     DEPLOYMENT=$NAME
     CONTAINER=$IMAGE
     YAMLFILE=$VERSION-$(date '+%Y-%m-%d_%H_%M_%S').yaml
     export RELEASE_VERSION=$VERSION
     export IMAGE=$IMAGE
+    export DEPLOYMENT=$NAME
+    export NAMESPACE=$NAMESPACE
+    export APP=$NAME
+    export DT_GRAIL_QUERY_BUDGET_GB=$DT_GRAIL_QUERY_BUDGET_GB
+    export DT_MCP_DISABLE_TELEMETRY=$DT_MCP_DISABLE_TELEMETRY
 
 }
 
 crossCompilePushDockerImage() {
-    #clean before building
-    mvn clean package
     #build the image
     docker buildx build --platform linux/amd64,linux/arm64 --push --tag $IMAGE .
 }
@@ -26,15 +36,21 @@ crossCompilePushDockerImage() {
 
 createDeployment() {
 
+    echo "Creating deployment with variables"
     envsubst <k8s/deployment.yaml >k8s/gen/deploy-$YAMLFILE
 
+    echo "Creating/Updating deployment in namespace $NAMESPACE"
     kubectl apply -f k8s/gen/deploy-$YAMLFILE
     # kubectl set image deployment/$deployment $name=$container -n $ns
-    echo "make sure to create the secret maxmind-credentials"
-    #kubectl create secret generic maxmind-credentials --from-literal=MAXMIND_ACCOUNT_ID=$MAXMIND_ACCOUNT_ID --from-literal=MAXMIND_LICENSE_KEY=$MAXMIND_LICENSE_KEY -n codespaces-tracker
+    
+    echo "Deleting secret if exists in namespace $NAMESPACE"
+    kubectl delete secret dt-credentials -n $NAMESPACE
+    
+    echo "Creating secret for dt-credentials in namespace $NAMESPACE"
+    kubectl create secret generic dt-credentials --from-literal=DT_ENVIRONMENT=$DT_ENVIRONMENT --from-literal=DT_PLATFORM_TOKEN=$DT_PLATFORM_TOKEN -n $NAMESPACE
 }
 
 
 setVariables
-crossCompilePushDockerImage
+#crossCompilePushDockerImage
 createDeployment

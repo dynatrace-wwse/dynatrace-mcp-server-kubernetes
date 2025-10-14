@@ -30,6 +30,12 @@ items:
               value: "${DT_GRAIL_QUERY_BUDGET_GB}"
             - name: DT_MCP_DISABLE_TELEMETRY
               value: "${DT_MCP_DISABLE_TELEMETRY}"
+            - name: DT_MCP_TELEMETRY_APPLICATION_ID
+              value: "${DT_MCP_TELEMETRY_APPLICATION_ID}"
+            - name: DT_MCP_TELEMETRY_ENDPOINT_URL
+              value: "${DT_MCP_TELEMETRY_ENDPOINT_URL}"
+            - name: DT_MCP_TELEMETRY_DEVICE_ID
+              value: "${DT_MCP_TELEMETRY_DEVICE_ID}"
             - name: DT_ENVIRONMENT
               valueFrom:
                 secretKeyRef:
@@ -41,7 +47,7 @@ items:
                   name: dt-credentials
                   key: DT_PLATFORM_TOKEN
           ports:
-          - containerPort: 3000
+          - containerPort: 8080
 - apiVersion: v1
   kind: Service
   metadata:
@@ -51,9 +57,10 @@ items:
     namespace: ${NAMESPACE}
   spec:
     ports:
-    - port: 3000
+    - port: 8080
       protocol: TCP
-      targetPort: 3000
+      targetPort: 8080
+      nodePort: 30303
     selector:
       app: ${APP}
-    type: ClusterIP
+    type: NodePort

@@ -9,7 +9,7 @@ setVariables() {
 
     VERSION=latest
     IMAGE="shinojosa/$NAME:$VERSION"
-
+    #IMAGE="shinojosa/todoapp:1.0.1"
     # MCP Server settings (defined in the .env file)
     source .env
     #DT_GRAIL_QUERY_BUDGET_GB=1000
@@ -25,6 +25,9 @@ setVariables() {
     export APP=$NAME
     export DT_GRAIL_QUERY_BUDGET_GB=$DT_GRAIL_QUERY_BUDGET_GB
     export DT_MCP_DISABLE_TELEMETRY=$DT_MCP_DISABLE_TELEMETRY
+    export DT_MCP_TELEMETRY_APPLICATION_ID=$DT_MCP_TELEMETRY_APPLICATION_ID
+    export DT_MCP_TELEMETRY_ENDPOINT_URL=$DT_MCP_TELEMETRY_ENDPOINT_URL
+    export DT_MCP_TELEMETRY_DEVICE_ID=$DT_MCP_TELEMETRY_DEVICE_ID
 
 }
 
@@ -50,7 +53,25 @@ createDeployment() {
     kubectl create secret generic dt-credentials --from-literal=DT_ENVIRONMENT=$DT_ENVIRONMENT --from-literal=DT_PLATFORM_TOKEN=$DT_PLATFORM_TOKEN -n $NAMESPACE
 }
 
+testMCP(){
+    curl -v http://34.54.214.149 -H "Host: playground-mcp-server.whydevslovedynatrace.com"
+
+    curl -X POST http://34.54.214.149/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream, application/json" \
+  -H "Host: playground-mcp-server.whydevslovedynatrace.com" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "test-session",
+    "method": "tools/call",
+    "params": {
+      "name": "get_status",
+      "arguments": {}
+    }
+  }'
+}
 
 setVariables
 #crossCompilePushDockerImage
 createDeployment
+#testMCP

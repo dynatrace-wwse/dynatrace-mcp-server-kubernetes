@@ -2,7 +2,7 @@
 FROM node:20
 
 # Expose the application port
-EXPOSE 3000
+EXPOSE 8080
 
 # Command to run the application
-CMD ["npx", "-y", "@dynatrace-oss/dynatrace-mcp-server@latest", "--http", "--port", "3000"]
+CMD ["npx", "-y", "@dynatrace-oss/dynatrace-mcp-server@latest", "--http", "--port", "8080"]

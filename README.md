@@ -1,48 +1,8 @@
-# dynatrace-mcp-server-kubernetes
+# Dynatrace local MCP Server in Kubernetes
 
-The Dynatrace MCP Server in a Kubernetes Deployment
+Small repo por packaging the Dynatrace MCP Server in a Kubernetes Deployment, creating a container, packing it in a deployment setting up environment variables and secrets, coping load with a replicaset and exposing it via an ingress.
 
-## Setup and Usage
+More information here [https://github.com/dynatrace-oss/dynatrace-mcp](https://github.com/dynatrace-oss/dynatrace-mcp)
 
-### Prerequisites
 
-- Docker installed
-- Kubernetes cluster configured
-- Node.js installed
-
-### Steps
-
-1. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-2. **Run the application locally**
-
-   ```bash
-   npm start
-   ```
-
-3. **Build Docker image**
-
-   ```bash
-   docker build -t dynatrace-mcp-server .
-   ```
-
-4. **Run Docker container**
-
-   ```bash
-   docker run -p 3000:3000 dynatrace-mcp-server
-   ```
-
-5. **Deploy to Kubernetes**
-
-   ```bash
-   kubectl apply -f deployment.yaml
-   kubectl apply -f service.yaml
-   ```
-
-6. **Access the application**
-
-   - Use the external IP of the LoadBalancer service to access the application.
+![mcp architecture](https://raw.githubusercontent.com/dynatrace-oss/dynatrace-mcp/refs/heads/main/assets/dynatrace-mcp-arch.png)

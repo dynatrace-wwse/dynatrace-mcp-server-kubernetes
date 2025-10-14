@@ -3,13 +3,12 @@
 setVariables() {
     
     # Settings
-
     NAME="dynatrace-mcp-server"
     NAMESPACE="playground-mcp-server"
 
     VERSION=latest
     IMAGE="shinojosa/$NAME:$VERSION"
-    #IMAGE="shinojosa/todoapp:1.0.1"
+
     # MCP Server settings (defined in the .env file)
     source .env
     #DT_GRAIL_QUERY_BUDGET_GB=1000
@@ -53,25 +52,7 @@ createDeployment() {
     kubectl create secret generic dt-credentials --from-literal=DT_ENVIRONMENT=$DT_ENVIRONMENT --from-literal=DT_PLATFORM_TOKEN=$DT_PLATFORM_TOKEN -n $NAMESPACE
 }
 
-testMCP(){
-    curl -v http://34.54.214.149 -H "Host: playground-mcp-server.whydevslovedynatrace.com"
-
-    curl -X POST http://34.54.214.149/mcp \
-  -H "Content-Type: application/json" \
-  -H "Accept: text/event-stream, application/json" \
-  -H "Host: playground-mcp-server.whydevslovedynatrace.com" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": "test-session",
-    "method": "tools/call",
-    "params": {
-      "name": "get_status",
-      "arguments": {}
-    }
-  }'
-}
 
 setVariables
 #crossCompilePushDockerImage
 createDeployment
-#testMCP

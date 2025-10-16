@@ -60,7 +60,7 @@ items:
     - port: 8080
       protocol: TCP
       targetPort: 8080
-      nodePort: 30303
+    #  nodePort: 30303
     selector:
       app: ${APP}
-    type: NodePort
+    type: ClusterIP

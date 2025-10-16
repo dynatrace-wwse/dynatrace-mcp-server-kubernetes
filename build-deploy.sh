@@ -4,7 +4,7 @@ setVariables() {
     
     # Settings
     NAME="dynatrace-mcp-server"
-    NAMESPACE="playground-mcp-server"
+    NAMESPACE="tacocorp-mcp-server"
 
     VERSION=latest
     IMAGE="shinojosa/$NAME:$VERSION"

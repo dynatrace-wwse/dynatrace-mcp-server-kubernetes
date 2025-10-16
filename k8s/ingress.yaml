@@ -6,21 +6,21 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-  name: playground-mcp-server-ingress
-  namespace: playground-mcp-server
+  name: tacocorp-mcp-server-ingress
+  namespace: tacocorp-mcp-server
 spec:
   rules:
-  - host: playground-mcp-server.whydevslovedynatrace.com
+  - host: tacocorp-mcp-server.whydevslovedynatrace.com
     http:
       paths:
       - backend:
           service:
             name: dynatrace-mcp-server-service
             port:
-              number: 3000
+              number: 8080
         path: /
         pathType: Prefix
   tls:
   - hosts:
-    - playground-mcp-server.whydevslovedynatrace.com
-    secretName: playground-mcp-server-tls
+    - tacocorp-mcp-server.whydevslovedynatrace.com
+    secretName: tacocorp-mcp-server-tls

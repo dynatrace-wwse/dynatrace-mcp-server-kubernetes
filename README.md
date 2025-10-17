@@ -6,3 +6,19 @@ More information here [https://github.com/dynatrace-oss/dynatrace-mcp](https://g
 
 
 ![mcp architecture](https://raw.githubusercontent.com/dynatrace-oss/dynatrace-mcp/refs/heads/main/assets/dynatrace-mcp-arch.png)
+
+
+
+
+
+<!-- 
+
+https://github.com/dynatrace-oss/dynatrace-mcp
+
+https://github.com/theharithsa/dynatrace-mcp-otel
+
+
+
+
+
+-->

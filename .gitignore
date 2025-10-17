@@ -12,6 +12,7 @@ npm-debug.log
 **-gen.yaml
 # loc files
 **-loc**
+
 # No mounted file shares
 **sshfs**
 # No DS Store files

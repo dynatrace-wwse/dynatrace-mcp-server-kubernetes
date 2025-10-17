@@ -38,6 +38,8 @@ items:
               value: "${DT_MCP_TELEMETRY_DEVICE_ID}"
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: "${OTEL_EXPORTER_OTLP_ENDPOINT}"
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "${OTEL_RESOURCE_ATTRIBUTES}"
             - name: DT_ENVIRONMENT
               valueFrom:
                 secretKeyRef:
@@ -53,11 +55,11 @@ items:
                 secretKeyRef:
                   name: dt-credentials
                   key: OTEL_EXPORTER_OTLP_HEADERS
-            - name: DT_API_TOKEN
+            - name: DYNATRACE_API_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: dt-credentials
-                  key: DT_API_TOKEN
+                  key: DYNATRACE_API_TOKEN
           ports:
           - containerPort: 8080
 - apiVersion: v1

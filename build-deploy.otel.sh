@@ -3,11 +3,11 @@
 setVariables() {
     
     # Settings
-    ENVIRONMENT="playground"
+    ENVIRONMENT="tacocorp"
     NAME="dynatrace-mcp-server"
     NAMESPACE=$ENVIRONMENT"-mcp-server"
 
-    VERSION=latest
+    VERSION=otel
     IMAGE="shinojosa/$NAME:$VERSION"
 
     # MCP Server settings (defined in the .env file)

@@ -5,4 +5,4 @@ FROM node:20
 EXPOSE 8080
 
 # Command to run the application
-CMD ["npx", "-y", "@dynatrace-oss/dynatrace-mcp-server@latest", "--http", "--port", "8080"]
+CMD ["npx", "-y", "@theharithsa/dynatrace-mcp-server", "--http", "--port", "8080"]

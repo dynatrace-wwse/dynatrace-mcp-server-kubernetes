@@ -20,7 +20,7 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
-  tls:
-  - hosts:
-    - tacocorp-mcp-server.whydevslovedynatrace.com
-    secretName: tacocorp-mcp-server-tls
+  #tls:
+  #- hosts:
+  #  - tacocorp-mcp-server.whydevslovedynatrace.com
+  #  secretName: tacocorp-mcp-server-tls
